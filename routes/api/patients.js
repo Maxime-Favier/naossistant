@@ -2,6 +2,11 @@ var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 
+//body parser
+var jsonParser = bodyParser.json();
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({extended: false});
+
 
 var con = mysql.createConnection({
     host: "localhost",
@@ -34,12 +39,14 @@ router.get('/search/:name', function (req, res, next) {
     })
 });
 
-router.get('/add', function (req, res) {
-    var salle = req.query.salle;
-    var nom = req.query.nom;
-    //console.log(salle);
-    //console.log(nom);
-    var sql = 'INSERT INTO patients (nom, salle) VALUE ?';
+router.post('/add', urlencodedParser, function (req, res) {
+    //console.log(req.body);
+    if (!req.body) return res.sendStatus(400);
+    var salle = req.body.salle;
+    var nom = req.body.nom;
+    console.log(salle);
+    console.log(nom);
+    var sql = 'INSERT INTO patients (nom, salle) VALUE (?, ?)';
     con.query(sql, [nom, salle], function (err, result) {
         if (err) throw err;
         //console.log("Number of records inserted: " + result.affectedRows);

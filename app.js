@@ -13,6 +13,16 @@ var apiPatient = require('./routes/api/patients');
 
 var app = express();
 
+//body parser
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json' }));
+
+// parse some custom thing into a Buffer
+app.use(bodyParser.raw({ type: 'application/vnd.custom-type' }));
+
+// parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html' }));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -22,8 +32,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+//app.use(bodyParser.json()); // support json encoded bodies
+//app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/', indexRouter);
 app.use('/patient', usersRouter);
