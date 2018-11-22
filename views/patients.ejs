@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patients</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Naossistant</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Docteurs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">RDV Médecin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Visites<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="jumbotron">
+    <h1 class="display-4">Liste des patients</h1>
+    <p class="lead">Retrouvez le nom de vos proche pour les visites</p>
+    <hr class="my-4">
+
+    <!--<form class="form-inline" action="/api/patient/add" method="get">-->
+        <!--<div class="form-group">-->
+            <!--<label for="nom">Nom:</label>-->
+            <!--<input type="text" class="form-control" id="nom">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="salle">Salle:</label>-->
+            <!--<input type="number" class="form-control" id="salle">-->
+        <!--</div>-->
+        <!--<button value="Submit" type="submit" class="btn btn-default">Submit</button>-->
+    <!--</form>-->
+    <form action="/api/patient/add" method="GET">
+        Nom: <input type="text" name="nom"><br>
+        Salle: <input type="number" name="salle"><br>
+        <input type="submit">
+    </form>
+
+    <hr class="my-4">
+
+    <div class="list-group">
+        <% out.forEach(function(out){ %>
+            <a href="#" class="list-group-item"><%= out.nom %> --- salle : <%= out.salle %></a>
+        <% }); %>
+    </div>
+
+    <!--<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
+</div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</html>
