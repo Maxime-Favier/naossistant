@@ -45,6 +45,10 @@
             <input type="text" class="form-control" id="nom" name="nom">
         </div>
         <div class="form-group mb-2 mr-sm-2">
+            <label for="salle">Prénom:</label>
+            <input type="text" class="form-control" id="prenom" name="prenom">
+        </div>
+        <div class="form-group mb-2 mr-sm-2">
             <label for="salle">Salle:</label>
             <input type="number" class="form-control" id="salle" name="salle">
         </div>
@@ -69,7 +73,7 @@
         <% out.forEach(function(out){ %>
             <tr>
                 <th scope="row"><%= out.id %></th>
-                <td>NaN</td>
+                <td><%= out.prenom %></td>
                 <td><%= out.nom %></td>
                 <td><%= out.salle %></td>
                 <td><a href="/api/patient/del/<%= out.id %>" class="btn"><i class="far fa-trash-alt"></i></a></td>

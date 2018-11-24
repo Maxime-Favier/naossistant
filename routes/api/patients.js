@@ -22,7 +22,7 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
     con.query("SELECT * FROM patients", function (err, result) {
         if (err) throw err;
-        console.log(result);
+        //console.log(result);
         res.send(result);
     });
 });
@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
 router.get('/search/:name', function (req, res, next) {
     con.query("SELECT * FROM patients WHERE nom = ?", req.params.name, function (err, result) {
         if (err) throw err;
-        console.log(result.length);
+        //console.log(result.length);
         if (typeof result === 'undefined' || result === null || result.length === 0) {
             res.send({code: "404", error: "Not found"})
         } else {
@@ -43,10 +43,11 @@ router.post('/add', urlencodedParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
     var salle = req.body.salle;
     var nom = req.body.nom;
-    var sql = 'INSERT INTO patients (nom, salle) VALUE (?, ?)';
-    con.query(sql, [nom, salle], function (err, result) {
+    var prenom = req.body.prenom;
+    var sql = 'INSERT INTO patients (nom, prenom, salle) VALUE (?, ?, ?)';
+    con.query(sql, [nom, prenom, salle], function (err, result) {
         if (err) throw err;
-        console.log('OK');
+        //console.log('OK');
         res.redirect("/patient");
     });
 });
@@ -56,7 +57,7 @@ router.get('/del/:id', function (req, res) {
     var sql = 'DELETE FROM patients WHERE id = ?';
     con.query(sql, req.params.id, function (err, result) {
         if (err) throw err;
-        console.log('OK');
+        //console.log('OK');
         res.redirect("/patient");
     });
 });
