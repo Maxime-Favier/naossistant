@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/patientlist');
+var medRouter = require('./routes/medecinlist');
 var apiPatient = require('./routes/api/patients');
 var apiMedecins = require('./routes/api/medecin');
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/patient', usersRouter);
+app.use('/medecin', medRouter);
 app.use('/api/patient', apiPatient);
 app.use('/api/medecin', apiMedecins);
 

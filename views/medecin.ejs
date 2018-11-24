@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Index</title>
+    <title>Patients</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -16,33 +18,66 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/medecin">Docteurs</a>
+                <a class="nav-link" href="#">Docteurs<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">RDV Médecin</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="patient">Visites</a>
+                <a class="nav-link" href="/patient">Visites</a>
             </li>
         </ul>
     </div>
 </nav>
 
+
 <div class="jumbotron">
-    <h1 class="display-4">Naossistant</h1>
-    <p class="lead">Le robot Naossistant est un assistant/guide dans un hôpital</p>
+    <h1 class="display-4">Liste des medecins</h1>
+    <p class="lead">Consultez les salles du personel médical</p>
     <hr class="my-4">
-    <p>Il tient l’accueil, il répond aux demandes, il conduit les personnes dans les salles demandées (visite de leur
-        famille, prise de rendez-vous avec des médecins, réconforter les patients, récupérer des dossiers médicaux
-        numériques, ajouter des événements).</p>
+
+    <form class="form-inline" action="/api/medecins/add" method="POST">
+        <div class="form-group mb-2 mr-sm-2">
+            <label for="nom">Nom:</label>
+            <input type="text" class="form-control" id="nom" name="nom">
+        </div>
+        <div class="form-group mb-2 mr-sm-2">
+            <label for="salle">Salle:</label>
+            <input type="number" class="form-control" id="salle" name="salle">
+        </div>
+        <input value="Submit" type="submit" class="btn btn-primary"/>
+    </form>
+
+
+    <hr class="my-4">
+
+
+    <table class="table table-striped table-sm table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Salle</th>
+            <th scope="col">Editer/Supprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% //out.forEach(function(out){ %>
+            <tr>
+                <th scope="row"><%= //out.id %></th>
+                <td><%= //out.nom %></td>
+                <td><%= //out.salle %></td>
+                <td><a href="/api/medecin/del/<%= //out.id %>" class="btn"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+        <% //}); %>
+        </tbody>
+    </table>
+
     <!--<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
 </div>
-
-<!--<h1><%= title %></h1>-->
-<!--<p>Welcome to <%= title %></p>-->
 
 
 </body>

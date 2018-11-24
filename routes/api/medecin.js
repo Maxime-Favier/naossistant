@@ -38,5 +38,38 @@ router.get('/search/:name', function (req, res, next) {
     })
 });
 
+router.post('/add', urlencodedParser, function (req, res) {
+    if (!req.body) return res.sendStatus(400);
+    var salle = req.body.salle;
+    var med_name = req.body.med_name;
+    var sql = 'INSERT INTO medecin (med_name, salle) VALUE (?, ?)';
+    con.query(sql, [med_name, salle], function (err, result) {
+        if (err) throw err;
+        //console.log('OK');
+        res.redirect("/medecin");
+    });
+});
+
+router.get('/del/:id', function (req, res) {
+    //console.log(req.body);
+    var sql = 'DELETE FROM medecin WHERE id = ?';
+    con.query(sql, req.params.id, function (err, result) {
+        if (err) throw err;
+        //console.log('OK');
+        res.redirect("/medecin");
+    });
+});
+
+router.post('/update/:id', urlencodedParser, function (req, res) {
+    if (!req.body) return res.sendStatus(400);
+    var salle = req.body.salle;
+    var sql = 'UPDATE patients SET salle = ? WHERE id = ?';
+    con.query(sql, [med_name, req.params.id], function (err, result) {
+        if (err) throw err;
+        //console.log('OK');
+        res.redirect("/medecin");
+    });
+});
+
 module.exports = router;
 //con.end();
