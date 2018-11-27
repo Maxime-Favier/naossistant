@@ -71,12 +71,11 @@
                 <td><%= out.med_name %></td>
                 <td><%= out.salle %></td>
                 <td>
-                    <a href="/api/medecin/del/<%= out.id %>" class="btn"><i class="far fa-trash-alt"></i></a>
-
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                             data-target="#Modal<%= out.id %>">
                         <i class="far fa-edit"></i>
                     </button>
+                    <a href="/api/medecin/del/<%= out.id %>" class="btn"><i class="far fa-trash-alt"></i></a>
 
                     <div class="modal fade" id="Modal<%= out.id %>" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,7 +89,7 @@
                                 </div>
                                 <form action="/api/medecin/update/<%= out.id %>" method="POST">
                                     <div class="modal-body">
-                                        Salle de :<%= out.med_name %>
+                                        Salle de Dr <%= out.med_name %>
                                         <input type="number" name="salle" id="salle">
                                     </div>
                                     <div class="modal-footer">
