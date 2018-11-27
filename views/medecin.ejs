@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Patients</title>
+    <title>Medecins</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -39,10 +39,10 @@
     <p class="lead">Consultez les salles du personel médical</p>
     <hr class="my-4">
 
-    <form class="form-inline" action="/api/medecins/add" method="POST">
+    <form class="form-inline" action="/api/medecin/add" method="POST">
         <div class="form-group mb-2 mr-sm-2">
             <label for="nom">Nom:</label>
-            <input type="text" class="form-control" id="nom" name="nom">
+            <input type="text" class="form-control" id="med_name" name="med_name">
         </div>
         <div class="form-group mb-2 mr-sm-2">
             <label for="salle">Salle:</label>
@@ -65,14 +65,46 @@
         </tr>
         </thead>
         <tbody>
-        <% //out.forEach(function(out){ %>
+        <% out.forEach(function(out){ %>
             <tr>
-                <th scope="row"><%= //out.id %></th>
-                <td><%= //out.nom %></td>
-                <td><%= //out.salle %></td>
-                <td><a href="/api/medecin/del/<%= //out.id %>" class="btn"><i class="far fa-trash-alt"></i></a></td>
+                <th scope="row"><%= out.id %></th>
+                <td><%= out.med_name %></td>
+                <td><%= out.salle %></td>
+                <td>
+                    <a href="/api/medecin/del/<%= out.id %>" class="btn"><i class="far fa-trash-alt"></i></a>
+
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                            data-target="#Modal<%= out.id %>">
+                        <i class="far fa-edit"></i>
+                    </button>
+
+                    <div class="modal fade" id="Modal<%= out.id %>" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Editer la salle</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="/api/medecin/update/<%= out.id %>" method="POST">
+                                    <div class="modal-body">
+                                        Salle de :<%= out.med_name %>
+                                        <input type="number" name="salle" id="salle">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                        <input type="submit" value="Save changes" class="btn btn-primary"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
             </tr>
-        <% //}); %>
+        <% }); %>
         </tbody>
     </table>
 

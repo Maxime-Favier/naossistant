@@ -63,10 +63,11 @@ router.get('/del/:id', function (req, res) {
 router.post('/update/:id', urlencodedParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
     var salle = req.body.salle;
-    var sql = 'UPDATE patients SET salle = ? WHERE id = ?';
-    con.query(sql, [med_name, req.params.id], function (err, result) {
+    var sql = 'UPDATE medecin SET salle = ? WHERE id = ?';
+    con.query(sql, [salle, req.params.id], function (err, result) {
         if (err) throw err;
         //console.log('OK');
+        //res.send("OK")
         res.redirect("/medecin");
     });
 });
