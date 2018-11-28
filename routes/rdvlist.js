@@ -14,9 +14,9 @@ router.get('/', function(req, res, next) {
     con.query("SELECT * FROM rdv WHERE date_debut >= NOW() ORDER BY date_debut ASC", function (err, result) {
         if (err) throw err;
         //console.log(result);
-        res.send(result);
+        res.render('rdv',{out: result});
     });
-    res.render('rdv');
+
 });
 
 module.exports = router;

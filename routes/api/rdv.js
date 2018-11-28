@@ -13,7 +13,8 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "naossistant"
+    database: "naossistant",
+    dateStrings:true,
 });
 
 
@@ -44,6 +45,16 @@ router.post('/add', urlencodedParser, function (req, res) {
     var date_fin = req.body.date_fin;
     var sql = 'INSERT INTO rdv (patient_name, dr_name, date_debut, date_fin) VALUE (?, ?, ?, ?)';
     con.query(sql, [patient_name, dr_name, date_debut, date_fin], function (err, result) {
+        if (err) throw err;
+        //console.log('OK');
+        res.redirect("/rdv");
+    });
+});
+
+router.get('/del/:id', function (req, res) {
+    //console.log(req.body);
+    var sql = 'DELETE FROM rdv WHERE id = ?';
+    con.query(sql, req.params.id, function (err, result) {
         if (err) throw err;
         //console.log('OK');
         res.redirect("/rdv");

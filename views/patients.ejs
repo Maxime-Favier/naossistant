@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Patients</title>
+
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -73,10 +74,10 @@
         <% out.forEach(function(out){ %>
             <tr>
                 <th scope="row"><%= out.id %></th>
-                <td><%= out.prenom %></td>
-                <td><%= out.nom %></td>
-                <td><%= out.salle %></td>
-                <td><a href="/api/patient/del/<%= out.id %>" class="btn"><i class="far fa-trash-alt"></i></a></td>
+                <td scope="row"><%= out.prenom %></td>
+                <td scope="row"><%= out.nom %></td>
+                <td scope="row"><%= out.salle %></td>
+                <td scope="row"><a href="/api/patient/del/<%= out.id %>" class="btn"><i class="far fa-trash-alt"></i></a></td>
             </tr>
         <% }); %>
         </tbody>

@@ -2,13 +2,17 @@
 <html>
 <head>
     <title>RDV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Naossistant</a>
+    <a class="navbar-brand" href="/">Naossistant</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,10 +39,55 @@
     <h1 class="display-4">Rendez Vous</h1>
     <p class="lead">Consultez les RDV de la journée</p>
     <hr class="my-4">
-    <p>Inject here</p>
-    <!--<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
-</div>
 
+    <!--<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
+    <form class="form-inline" action="/api/rdv/add" method="POST">
+        <div class="form-group mb-2 mr-sm-2">
+            <label for="patient_name">Nom du patient:</label>
+            <input type="text" class="form-control" placeholder="Nom du patient" id="patient_name" name="patient_name"
+                   required>
+        </div>
+        <div class="form-group mb-2 mr-sm-2">
+            <label for="dr_name">Nom du Docteur:</label>
+            <input type="text" class="form-control" placeholder="Nom du Docteur" id="dr_name" name="dr_name" required>
+        </div>
+        <div class="form-group mb-2 mr-sm-2">
+            <label for="date_debut">date du début:</label>
+            <input type="text" class="form-control" id="date_debut" name="date_debut" required>
+        </div>
+        <div class="form-group mb-2 mr-sm-2">
+            <label for="date_fin">date du fin:</label>
+            <input type="text" class="form-control" id="date_fin" name="date_fin" required>
+        </div>
+        <input value="Submit" type="submit" class="btn btn-primary mb-2 mr-sm-2"/>
+    </form>
+
+    <table class="table table-striped table-sm table-hover mt-3">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom du Patient</th>
+            <th scope="col">Nom du Médecin</th>
+            <th scope="col">Début</th>
+            <th scope="col">Fin</th>
+            <th scope="col">Supprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% out.forEach(function(out){ %>
+            <tr>
+                <th scope="row"><%= out.id %></th>
+                <td scope="row"><%= out.patient_name %></td>
+                <td scope="row"><%= out.dr_name %></td>
+                <td scope="row"><%= out.date_debut %></td>
+                <td scope="row"><%= out.date_fin %></td>
+                <td scope="row"><a href="/api/rdv/del/<%= out.id %>" class="btn"><i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>
 
 
 </body>
@@ -51,4 +100,23 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+<script>
+    $("#date_debut").flatpickr({
+        minDate: "today",
+        maxDate: new Date().fp_incr(14),
+        time_24hr: true,
+        enableTime: true,
+        allowInput: true,
+        dateFormat: "Y-m-d H:i:00"
+    });
+    $("#date_fin").flatpickr({
+        minDate: "today",
+        maxDate: new Date().fp_incr(14),
+        time_24hr: true,
+        enableTime: true,
+        allowInput: true,
+        dateFormat: "Y-m-d H:i:00"
+    });
+</script>
 </html>

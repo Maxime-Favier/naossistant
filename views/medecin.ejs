@@ -68,9 +68,9 @@
         <% out.forEach(function(out){ %>
             <tr>
                 <th scope="row"><%= out.id %></th>
-                <td><%= out.med_name %></td>
-                <td><%= out.salle %></td>
-                <td>
+                <td scope="row"><%= out.med_name %></td>
+                <td scope="row"><%= out.salle %></td>
+                <td scope="row">
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                             data-target="#Modal<%= out.id %>">
                         <i class="far fa-edit"></i>
