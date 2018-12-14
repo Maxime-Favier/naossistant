@@ -11,7 +11,7 @@ var con = mysql.createConnection({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    con.query("SELECT * FROM rdv WHERE date_debut >= NOW() ORDER BY date_debut ASC", function (err, result) {
+    con.query("SELECT * FROM rdv WHERE date_fin >= NOW() ORDER BY date_debut ASC", function (err, result) {
         if (err) throw err;
         //console.log(result);
         res.render('rdv',{out: result});

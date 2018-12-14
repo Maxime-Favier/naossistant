@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/future', function(req, res, next) {
-    con.query("SELECT * FROM rdv WHERE date_debut >= NOW() ORDER BY date_debut ASC", function (err, result) {
+    con.query("SELECT * FROM rdv WHERE date_fin >= NOW() ORDER BY date_debut ASC", function (err, result) {
         if (err) throw err;
         //console.log(result);
         res.send(result);
@@ -37,6 +37,15 @@ router.get('/future', function(req, res, next) {
 
 });
 
+router.get('/nao/:medecin', function(req, res, next) {
+    sql = "SELECT * FROM rdv WHERE date_debut >= NOW() AND date_fin > DATE_ADD(NOW(), INTERVAL 40 MINUTE) AND dr_name = ? ORDER BY date_debut ASC";
+    con.query(sql, req.params.medecin, function (err, result) {
+        if (err) throw err;
+        //console.log(result);
+        res.send(result);
+    });
+
+});
 router.post('/add', urlencodedParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
     var patient_name = req.body.patient_name;
@@ -46,7 +55,7 @@ router.post('/add', urlencodedParser, function (req, res) {
     var sql = 'INSERT INTO rdv (patient_name, dr_name, date_debut, date_fin) VALUE (?, ?, ?, ?)';
     con.query(sql, [patient_name, dr_name, date_debut, date_fin], function (err, result) {
         if (err) throw err;
-        //console.log('OK');
+        console.log('OK');
         res.redirect("/rdv");
     });
 });

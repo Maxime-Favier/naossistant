@@ -68,7 +68,7 @@
         <% out.forEach(function(out){ %>
             <tr>
                 <th scope="row"><%= out.id %></th>
-                <td scope="row"><%= out.med_name %></td>
+                <td scope="row"><%= out.medname %></td>
                 <td scope="row"><%= out.salle %></td>
                 <td scope="row">
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
@@ -89,7 +89,7 @@
                                 </div>
                                 <form action="/api/medecin/update/<%= out.id %>" method="POST">
                                     <div class="modal-body">
-                                        Salle de Dr <%= out.med_name %>
+                                        Salle de Dr <%= out.medname %>
                                         <input type="number" name="salle" id="salle">
                                     </div>
                                     <div class="modal-footer">

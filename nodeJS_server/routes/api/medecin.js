@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/search/:name', function (req, res, next) {
-    con.query("SELECT * FROM medecin WHERE med_name = ?", req.params.name, function (err, result) {
+    con.query("SELECT * FROM medecin WHERE medname = ?", req.params.name, function (err, result) {
         if (err) throw err;
         //console.log(result.length);
         if (typeof result === 'undefined' || result === null || result.length === 0) {
@@ -42,7 +42,7 @@ router.post('/add', urlencodedParser, function (req, res) {
     if (!req.body) return res.sendStatus(400);
     var salle = req.body.salle;
     var med_name = req.body.med_name;
-    var sql = 'INSERT INTO medecin (med_name, salle) VALUE (?, ?)';
+    var sql = 'INSERT INTO medecin (medname, salle) VALUE (?, ?)';
     con.query(sql, [med_name, salle], function (err, result) {
         if (err) throw err;
         //console.log('OK');

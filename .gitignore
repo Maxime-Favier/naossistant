@@ -1,3 +1,3 @@
 .gitignore
-node_modules
+nodeJS_server/node_modules
 .idea
