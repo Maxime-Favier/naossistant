@@ -6,7 +6,7 @@ from naoqi import ALProxy
 import urllib2
 import json
 
-ROBOT_IP = "169.254.232.52"
+ROBOT_IP = "169.254.216.239"
 
 # header pour les requetes à l'API
 hdr = {

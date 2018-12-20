@@ -38,7 +38,7 @@ router.get('/future', function(req, res, next) {
 });
 
 router.get('/nao/:medecin', function(req, res, next) {
-    sql = "SELECT * FROM rdv WHERE date_debut >= NOW() AND date_fin > DATE_ADD(NOW(), INTERVAL 40 MINUTE) AND dr_name = ? ORDER BY date_debut ASC";
+    sql = "SELECT * FROM rdv WHERE (date_debut >= NOW() OR date_fin > DATE_ADD(NOW(), INTERVAL 40 MINUTE)) AND dr_name = ? ORDER BY date_debut ASC";
     con.query(sql, req.params.medecin, function (err, result) {
         if (err) throw err;
         //console.log(result);
